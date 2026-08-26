@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# C# / .NET / Visual Studio (src/ 개발 시)
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+.vs/
+*.userprefs
+publish/
