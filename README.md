@@ -36,12 +36,20 @@ IndexTab-Win/
 - **창 관리:** Win32 API (`EnumWindows`, `SetForegroundWindow`, `MonitorFromPoint` 등) — P/Invoke
 - 자세한 근거는 핸드오프 문서 §5 참고.
 
-## 상태
+## 상태 (v0.1.0 — 첫 동작 버전 완성)
 
 - [x] 인수인계 문서 작성
-- [ ] WPF 프로젝트 스캐폴딩
-- [ ] 트레이 아이콘 + 항상-위 스트립 창
-- [ ] 창 열거 → 탭 렌더링
-- [ ] 클릭 → 창 raise
-- [ ] 호버 확장/축소 애니메이션
-- [ ] 멀티모니터 · 좌우 위치 · 설정 저장
+- [x] WPF 프로젝트 스캐폴딩 (.NET 10 / net10.0-windows / x64 / PerMonitorV2)
+- [x] 트레이 아이콘 + 항상-위 투명 스트립 창 (NOACTIVATE·TOOLWINDOW·TOPMOST·layered)
+- [x] 창 열거 → 탭 렌더링 (세로 텍스트: 한글 upright / 영문 회전, 그라데이션·seam 그림자)
+- [x] 클릭 → 창 raise (`SetForegroundWindow`+`AttachThreadInput`) — 동작 검증됨
+- [x] 호버 확장/축소 애니메이션 (0.13초 easeOut, 아이콘+이름) — 동작 검증됨
+- [x] 멀티모니터 · 좌우 위치 · 설정 저장 (`%APPDATA%\IndexTab\settings.json`)
+
+> 빌드: `cd src && dotnet build` → `dotnet run` (자세한 건 [`src/DEV_NOTES.md`](src/DEV_NOTES.md))
+
+### 다음 다듬을 점
+- 영문 세로 이름이 길면 폰트 축소 대신 말줄임(`…`)됨 → macOS처럼 축소-피팅으로 개선
+- 혼합 DPI(모니터별 배율 상이) 환경 정밀 검증
+- 앱별 색상 팔레트(macOS `ColorPalette`) 도입 여부 검토
+- 시작 프로그램 등록(선택)

@@ -1,0 +1,12 @@
+<Application x:Class="IndexTab.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnExplicitShutdown">
+    <!--
+      트레이 상주 앱이므로 StartupUri 없음.
+      ShutdownMode=OnExplicitShutdown → 창을 다 닫아도 종료되지 않고
+      트레이 메뉴의 '종료'로만 끝난다.
+    -->
+    <Application.Resources>
+    </Application.Resources>
+</Application>
