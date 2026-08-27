@@ -6,7 +6,7 @@ IndexTab은 각 모니터 가장자리에 세로 인덱스 탭 스트립을 띄�
 한눈에 보고 클릭 한 번으로 전환하는 유틸리티입니다. 원본은 macOS(Swift)에서 v0.1.19까지 개발되었고,
 이 저장소는 그 동작을 그대로 재현하는 **윈도우 전용 버전**을 새로 만드는 곳입니다.
 
-> 원본 macOS 버전과는 **별도 저장소**로 각각 완성한 뒤, 추후 크로스플랫폼으로 통합할지 판단합니다.
+> 🍎 형제 앱(macOS 원본): **[IndexTab-Mac](https://github.com/blackcore76/IndexTab-Mac)** — 별도 저장소로 각각 완성한 뒤, 추후 크로스플랫폼 통합 여부를 판단합니다.
 
 ## 👉 개발을 시작하는 Claude Code / 개발자는 여기부터
 
@@ -36,7 +36,9 @@ IndexTab-Win/
 - **창 관리:** Win32 API (`EnumWindows`, `SetForegroundWindow`, `MonitorFromPoint` 등) — P/Invoke
 - 자세한 근거는 핸드오프 문서 §5 참고.
 
-## 상태 (v0.1.0 — 첫 동작 버전 완성)
+## 상태 (v0.1.1 — 포터블 배포 준비)
+
+> 릴리즈 노트: [`RELEASE_NOTES_v0.1.1.md`](RELEASE_NOTES_v0.1.1.md)
 
 - [x] 인수인계 문서 작성
 - [x] WPF 프로젝트 스캐폴딩 (.NET 10 / net10.0-windows / x64 / PerMonitorV2)
@@ -47,6 +49,17 @@ IndexTab-Win/
 - [x] 멀티모니터 · 좌우 위치 · 설정 저장 (`%APPDATA%\IndexTab\settings.json`)
 
 > 빌드: `cd src && dotnet build` → `dotnet run` (자세한 건 [`src/DEV_NOTES.md`](src/DEV_NOTES.md))
+>
+> 포터블 배포 빌드: `cd src && dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true`
+
+### 실행 & 권한
+
+설치 없이 **`IndexTab.exe` 실행**만으로 트레이에 상주합니다 (Windows 10/11 64-bit). 두 가지 모드:
+
+- **그냥 실행** → 일반 앱 창 전환 (탐색기·브라우저·메신저 등 — 대부분 이걸로 충분)
+- **관리자 권한으로 실행** (우클릭 → *관리자 권한으로 실행*) → 위 + **관리자로 띄운 창**(관리자 PowerShell/터미널 등)까지 제어
+
+> Windows 보안 정책(UIPI)상 낮은 권한 앱은 관리자 창을 제어할 수 없어, 관리자 창까지 다루려면 IndexTab도 관리자로 실행해야 합니다. (향후 코드 서명 + uiAccess로 UAC 없이 지원하는 방안 검토 중)
 
 ### 다음 다듬을 점
 - 영문 세로 이름이 길면 폰트 축소 대신 말줄임(`…`)됨 → macOS처럼 축소-피팅으로 개선
